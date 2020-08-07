@@ -1,0 +1,15 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "blaadje",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn parcel index.html",
+    "build": "yarn parcel build index.html --public-url ./"
+  },
+  "dependencies": {
+    "foo": "^0.0.7",
+    "parcel": "^1.12.4"
+  }
+}

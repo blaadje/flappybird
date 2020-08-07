@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #20222c;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  height: 512px;
+  width: 388px;
+  background: url('./assets/background-day.png');
+  display: flex;
+  overflow: hidden;
+}
+
+.score {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.game {
+  position: relative;
+  height: 100%;
+  width: 388px;
+  border-radius: 0.3rem;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.base {
+  height: 112px;
+  width: 100%;
+  will-change: background-position;
+  background: url('./assets/base.png');
+  animation: base 1.8s infinite linear;
+  z-index: 2;
+}
+
+@keyframes play {
+  100% {
+    background-position: -150px;
+  }
+}
+
+@keyframes base {
+  100% {
+    background-position: -336px;
+  }
+}
