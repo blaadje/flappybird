@@ -1,5 +1,5 @@
 import Pipe from './Pipe'
-import { getRandomIntInclusive, inRange } from '../utils'
+import { getRandomIntInclusive } from '../utils'
 
 export default class Pipes {
   constructor(player, container) {
@@ -25,6 +25,7 @@ export default class Pipes {
 
       return pipe
     })
+    this.storedPipes = this.displayedPipes
   }
 
   createPipe() {
@@ -43,37 +44,39 @@ export default class Pipes {
     const newPipe = this.createPipe()
 
     const [pipeToDelete, ...rest] = this.displayedPipes
+    this.storedPipes = [...this.storedPipes, newPipe]
     this.displayedPipes = [...rest, newPipe]
     this.pipes.appendChild(newPipe.get())
     this.pipes.removeChild(pipeToDelete.get())
   }
 
   checkScore() {
+    const selectedPipe = this.storedPipes[0]
     const playerPosition = this.player.getCoordonates()
-    const hasCollision = this.displayedPipes.some((pipe) => {
-      const topSectionPosition = pipe.getTopSection().getBoundingClientRect()
-      const bottomSectionPosition = pipe
-        .getBottomSection()
-        .getBoundingClientRect()
+    const topSectionPosition = selectedPipe
+      .getTopSection()
+      .getBoundingClientRect()
+    const bottomSectionPosition = selectedPipe
+      .getBottomSection()
+      .getBoundingClientRect()
 
-      return (
-        playerPosition.right > pipe.getCoordonates().left &&
-        playerPosition.left < pipe.getCoordonates().right &&
-        (playerPosition.top < topSectionPosition.bottom ||
-          playerPosition.bottom > bottomSectionPosition.top)
-      )
-    })
-
-    const hasPassedPipe = this.displayedPipes.some((pipe) => {
-      return inRange(1, playerPosition.left, pipe.getCoordonates().right)
-    })
+    const hasCollision =
+      playerPosition.right > selectedPipe.getCoordonates().left &&
+      playerPosition.left < selectedPipe.getCoordonates().right &&
+      (playerPosition.top < topSectionPosition.bottom ||
+        playerPosition.bottom > bottomSectionPosition.top)
 
     if (hasCollision) {
       this.playerCollisionCallback()
       return
     }
 
+    const hasPassedPipe =
+      playerPosition.left > selectedPipe.getCoordonates().right
+
     if (hasPassedPipe) {
+      const [, ...rest] = this.storedPipes
+      this.storedPipes = rest
       this.playerPassedPipeCallback()
     }
   }
@@ -91,8 +94,8 @@ export default class Pipes {
   }
 
   updatePipesPosition() {
-    this.transform = this.transform + 3
-    this.pipes.style.transform = `translateX(-${this.transform}px) translateZ(0) `
+    this.transform = this.transform + 2
+    this.pipes.style.transform = `translateX(-${this.transform}px) translateZ(0)`
   }
 
   setGameStarted() {

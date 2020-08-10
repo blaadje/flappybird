@@ -9,7 +9,7 @@ export default class Pipe {
 
     const pipeWidth = 70
     const gutterOffset = 40
-    const distanceOffest = 130
+    const distanceOffest = 140
     const gutterHeight = playerSize + gutterOffset
     const topPipeHeight = `calc(${pourcentage}% - ${gutterHeight}px)`
     const bottomPipeHeight = `calc(${100 - pourcentage}% - ${gutterHeight}px)`
