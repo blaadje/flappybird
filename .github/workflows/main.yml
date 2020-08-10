@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+        
+      - name: Install dependencies
+        run: yarn install && yarn build
+        
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
         with:
