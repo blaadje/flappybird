@@ -11,5 +11,9 @@
   "dependencies": {
     "foo": "^0.0.7",
     "parcel": "^1.12.4"
+  },
+  "devDependencies": {
+    "parcel-plugin-sw-precache": "^1.1.2",
+    "sass": "^1.26.10"
   }
 }

@@ -16,6 +16,7 @@ export default class Player {
     this.player.style.top = '0'
     this.player.style.zIndex = '3'
     this.player.style.willChange = 'transform'
+    this.player.setAttribute('id', 'player')
 
     this.createAppearance()
   }

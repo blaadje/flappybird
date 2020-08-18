@@ -34,7 +34,7 @@ export default class Gravity {
     this.entity.get().style.transform = `translateY(${this.position}px) translateZ(0) rotate(${this.rotation})`
   }
 
-  checkPosition() {
+  checkEntityTouchedGround() {
     if (
       this.entity.getCoordonates().bottom >=
       this.container.getBoundingClientRect().bottom
@@ -56,6 +56,6 @@ export default class Gravity {
     this.position = this.position + this.acceleration
 
     this.updateEntityPosition()
-    this.checkPosition()
+    this.checkEntityTouchedGround()
   }
 }
