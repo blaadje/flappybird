@@ -1,4 +1,3 @@
-import Gravity from './resources/Gravity'
 import Game from './resources/Game'
 import './game.scss'
 

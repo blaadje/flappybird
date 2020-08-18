@@ -7,6 +7,7 @@ import jumpSoundFile from '../assets/sounds/sfx_wing.mp3'
 import pointSoundFile from '../assets/sounds/sfx_point.mp3'
 import dieSoundFile from '../assets/sounds/sfx_die.mp3'
 import hitSoundFile from '../assets/sounds/sfx_hit.mp3'
+import splashScreenImage from '../assets/splash.png'
 
 const container = document.getElementById('container')
 const scoreElement = document.getElementById('score')
@@ -22,14 +23,14 @@ export default class Game {
     this.rAfAnimation = null
     this.player = new Player(container)
     this.gravity = new Gravity(container, this.player)
+    this.splashScreen = this.generateSplashScreen()
 
     container.appendChild(this.player.get())
 
     this.pipes = new Pipes(this.player, container)
 
     container.appendChild(this.pipes.get())
-
-    this.drawScore()
+    container.appendChild(this.splashScreen)
 
     this.pipes.onPlayerPassedPipe(this.onPlayerPassedPipe)
     this.pipes.onPlayerCollision(this.onPlayerCollision)
@@ -38,6 +39,32 @@ export default class Game {
     document.addEventListener('keydown', this.interaction)
     document.addEventListener('touchstart', this.interaction)
   }
+
+  generateSplashScreen() {
+    const splashScreen = new Image(200, 200)
+    splashScreen.src = splashScreenImage
+    splashScreen.style.position = 'absolute'
+    splashScreen.style.top = '10%'
+    splashScreen.style.left = '50%'
+    splashScreen.style.transform = 'translateX(-50%)'
+    splashScreen.animate(
+      [
+        { transform: 'translateX(-50%) translateY(-100px)', opacity: 0 },
+        { transform: 'translateX(-50%) translateY(0)', opacity: 1 },
+      ],
+      {
+        duration: 1000,
+        easing: 'ease',
+      },
+    )
+
+    return splashScreen
+  }
+
+  removeSplashScreen() {
+    container.removeChild(this.splashScreen)
+  }
+
   onPlayerPassedPipe = () => {
     pointSound.src = pointSoundFile
     pointSound.play()
@@ -71,6 +98,8 @@ export default class Game {
     }
 
     if (this.isGameStarted === null) {
+      this.removeSplashScreen()
+      this.drawScore()
       this.render()
       this.gravity.setGameStarted()
       this.pipes.setGameStarted()
