@@ -32,6 +32,7 @@ export default class Game {
       this.container.removeChild(this.container.firstChild)
     }
 
+    this.lastTick = null
     this.score = 0
     this.isGameStarted = null
     this.rAfAnimation = null
@@ -195,6 +196,7 @@ export default class Game {
 
   getScore(score, height = 36, width = 24) {
     const scoreElement = document.createElement('div')
+    scoreElement.style.display = 'flex'
 
     const digits = String(score)
 
@@ -227,11 +229,21 @@ export default class Game {
     this.container.removeChild(this.scoreElement)
   }
 
-  render() {
-    const render = this.render.bind(this)
-    this.rAfAnimation = window.requestAnimationFrame(render)
+  render = (now) => {
+    const FPS = 90
+    this.rAfAnimation = window.requestAnimationFrame(this.render)
 
-    this.pipes.render()
+    if (!this.lastTick) {
+      this.lastTick = now
+    }
+    const delta = now - this.lastTick
+
+    if (delta < 100 / FPS) {
+      return
+    }
+
+    this.pipes.render(delta)
     this.gravity.render()
+    this.lastTick = now
   }
 }
