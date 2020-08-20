@@ -1,3 +1,5 @@
+@import 'normalize';
+
 @font-face {
   font-family: flappyBirdy;
   src: url('./assets/FlappyBirdy.ttf');
@@ -10,6 +12,7 @@ body {
   text-transform: uppercase;
   touch-action: manipulation;
   margin: 0;
+  line-height: 100%;
   padding: 0;
 }
 
@@ -61,6 +64,7 @@ body {
 
 .base {
   height: 112px;
+  flex-shrink: 0;
   width: 100%;
   will-change: background-position;
   background: url('./assets/base.png');
