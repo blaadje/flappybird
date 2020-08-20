@@ -95,11 +95,6 @@ export default class Game {
         easing: 'ease',
       },
     )
-    scoreText.style.marginBottom = '5px'
-    scoreText.innerText = 'Score'
-
-    bestScoreText.style.marginBottom = '5px'
-    bestScoreText.innerText = 'Best'
 
     scoreBackground.style.background = `url(${scoreBackgroundImage}) no-repeat`
     scoreBackground.style.backgroundSize = 'contain'
@@ -108,7 +103,13 @@ export default class Game {
     scoreBackground.style.alignItems = 'center'
     scoreBackground.style.width = '150px'
     scoreBackground.style.height = '200px'
-    scoreBackground.style.paddingTop = '20px'
+    scoreBackground.style.paddingTop = '15px'
+
+    scoreText.style.marginBottom = '5px'
+    scoreText.innerText = 'Score'
+
+    bestScoreText.style.marginBottom = '5px'
+    bestScoreText.innerText = 'Best'
 
     scoreBackground.style.marginBottom = '10px'
 
