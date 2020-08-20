@@ -1,15 +1,10 @@
 import pipeImage from '../assets/pipe-green.png'
 
-let generatedPipeNumber = 0
-
 export default class Pipe {
-  constructor(pourcentage, playerSize) {
-    generatedPipeNumber = generatedPipeNumber + 1
+  constructor(pourcentage, playerSize, pipeWidth, offset) {
     this.pipe = document.createElement('div')
 
-    const pipeWidth = 70
     const gutterOffset = 40
-    const distanceOffest = 140
     const gutterHeight = playerSize + gutterOffset
     const topPipeHeight = `calc(${pourcentage}% - ${gutterHeight}px)`
     const bottomPipeHeight = `calc(${100 - pourcentage}% - ${gutterHeight}px)`
@@ -17,9 +12,7 @@ export default class Pipe {
     this.pipe.style.display = 'flex'
     this.pipe.style.flexDirection = 'column'
     this.pipe.style.position = 'absolute'
-    this.pipe.style.left = `${
-      (pipeWidth + distanceOffest) * generatedPipeNumber
-    }px`
+    this.pipe.style.left = `${offset}px`
     this.pipe.style.top = '0px'
 
     this.pipe.style.width = `${pipeWidth}px`

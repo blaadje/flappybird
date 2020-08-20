@@ -10,6 +10,7 @@ export default class Pipes {
     this.playerCollisionCallback = null
     this.playerPassedPipeCallback = null
     this.stop = null
+    this.generatedPipeNumber = 0
 
     this.pipes.style.display = 'inline-flex'
     this.pipes.style.position = 'absolute'
@@ -29,10 +30,18 @@ export default class Pipes {
   }
 
   createPipe() {
-    return new Pipe(
+    const pipeWidth = 70
+    const gapWidth = 140
+    const offset = (pipeWidth + gapWidth) * this.generatedPipeNumber
+    const pipe = new Pipe(
       Math.floor(getRandomIntInclusive(30, 70)),
       this.player.get().clientHeight,
+      pipeWidth,
+      offset,
     )
+    this.generatedPipeNumber = this.generatedPipeNumber + 1
+
+    return pipe
   }
 
   checkPipes() {
