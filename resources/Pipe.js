@@ -4,7 +4,7 @@ export default class Pipe {
   constructor(pourcentage, playerSize, pipeWidth, offset) {
     this.pipe = document.createElement('div')
 
-    const gutterOffset = 40
+    const gutterOffset = 30
     const gutterHeight = playerSize + gutterOffset
     const topPipeHeight = `calc(${pourcentage}% - ${gutterHeight}px)`
     const bottomPipeHeight = `calc(${100 - pourcentage}% - ${gutterHeight}px)`

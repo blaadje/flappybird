@@ -2,8 +2,8 @@ export default class Gravity {
   constructor(container, entity) {
     this.container = container
     this.position = container.clientHeight / 2
-    this.gravity = 0.25
-    this.jump = -5
+    this.gravity = 0.45
+    this.jump = -6.5
     this.acceleration = 0
     this.entity = entity
     this.rotation = '0deg'

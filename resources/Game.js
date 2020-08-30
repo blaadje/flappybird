@@ -18,6 +18,8 @@ const dieSound = new Audio(dieSoundFile)
 const pointSound = new Audio(pointSoundFile)
 const hitSound = new Audio(hitSoundFile)
 
+const FPS = 30
+
 export default class Game {
   constructor() {
     this.container = document.getElementById('container')
@@ -117,7 +119,7 @@ export default class Game {
     scoreScreen.append(scoreBackground, restartButton)
 
     if (bestScoreBeatten) {
-      setCookie('bestScore', this.score, Infinity)
+      setCookie('bestScore', this.score, 999999)
     }
 
     return scoreScreen
@@ -231,15 +233,15 @@ export default class Game {
   }
 
   render = (now) => {
-    const FPS = 90
-    this.rAfAnimation = window.requestAnimationFrame(this.render)
-
     if (!this.lastTick) {
       this.lastTick = now
     }
+
+    this.rAfAnimation = window.requestAnimationFrame(this.render)
+
     const delta = now - this.lastTick
 
-    if (delta < 100 / FPS) {
+    if (delta > FPS) {
       return
     }
 

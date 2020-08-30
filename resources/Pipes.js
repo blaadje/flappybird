@@ -30,8 +30,8 @@ export default class Pipes {
   }
 
   createPipe() {
-    const pipeWidth = 70
-    const gapWidth = 140
+    const pipeWidth = 80
+    const gapWidth = 130
     const offset = (pipeWidth + gapWidth) * this.generatedPipeNumber
     const pipe = new Pipe(
       Math.floor(getRandomIntInclusive(30, 70)),
@@ -103,7 +103,7 @@ export default class Pipes {
   }
 
   updatePipesPosition() {
-    this.transform = this.transform + 2
+    this.transform = this.transform + 3
     this.pipes.style.transform = `translateX(-${this.transform}px) translateZ(0)`
   }
 

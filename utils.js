@@ -4,21 +4,12 @@ export const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export const inRange = (x, a, b) => {
-  return (b >= a && b <= a + x) || (b <= a && b >= a - x)
-}
-
 export const setCookie = (name, value, daysToLive) => {
-  // Encode value in order to escape semicolons, commas, and whitespace
-  let cookie = name + '=' + encodeURIComponent(value)
+  const date = new Date()
+  date.setTime(date.getTime() + daysToLive * 24 * 60 * 60 * 1000)
 
-  if (typeof daysToLive === 'number') {
-    /* Sets the max-age attribute so that the cookie expires
-      after the specified number of days */
-    cookie += '; max-age=' + daysToLive * 24 * 60 * 60
-
-    document.cookie = cookie
-  }
+  const expires = `expires=${date.toUTCString()}`
+  document.cookie = `${name}=${value};${expires};path=/`
 }
 
 export const getCookie = (name) => {

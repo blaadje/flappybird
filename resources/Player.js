@@ -6,8 +6,8 @@ export default class Player {
     this.image = image
     this.player = document.createElement('div')
 
-    this.height = 30
-    this.width = 30
+    this.height = 40
+    this.width = 40
 
     this.player.style.height = `${this.height}px`
     this.player.style.width = `${this.width}px`
@@ -25,6 +25,10 @@ export default class Player {
     return this.player
   }
 
+  getCoordonates() {
+    return this.player.getBoundingClientRect()
+  }
+
   createAppearance() {
     const appearance = document.createElement('div')
 
@@ -39,18 +43,5 @@ export default class Player {
     appearance.style.animation = 'play 0.5s steps(3) infinite'
 
     this.player.appendChild(appearance)
-  }
-
-  getCoordonates() {
-    return {
-      x: Math.round(this.player.getBoundingClientRect().x),
-      y: Math.round(this.player.getBoundingClientRect().y),
-      width: Math.round(this.player.getBoundingClientRect().width),
-      height: Math.round(this.player.getBoundingClientRect().height),
-      top: Math.round(this.player.getBoundingClientRect().top),
-      right: Math.round(this.player.getBoundingClientRect().right),
-      bottom: Math.round(this.player.getBoundingClientRect().bottom),
-      left: Math.round(this.player.getBoundingClientRect().left),
-    }
   }
 }
